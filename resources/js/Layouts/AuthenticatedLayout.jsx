@@ -48,11 +48,6 @@ export default function Authenticated({ user, header, children }) {
                                             >
                                                 {user.name}
 
-                                                <img
-                                                    className="h-6 w-6"
-                                                    src="https://glasscannonunplugged.com/wp-content/uploads/2022/04/GCU-logo-light-2.svg"
-                                                    alt=""
-                                                />
                                                 <svg
                                                     className="ms-2 -me-0.5 h-4 w-4"
                                                     xmlns="http://www.w3.org/2000/svg"

@@ -7,6 +7,8 @@ Do uruchomienia projektu niezbędna jest lokalna baza danych (Docker, Xammpp itd
 ```
 npm instal
 composer install
+php artisan migrate
+php artisan db:seed
 npm run dev
 php artisan serve
 ```

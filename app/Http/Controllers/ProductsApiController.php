@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Products;
+
 class ProductsApiController extends Controller
 {
     /**
@@ -11,11 +13,7 @@ class ProductsApiController extends Controller
      */
     public function index()
     {
-
-        return response()->json([
-            'name' => 'Abigail',
-            'state' => 'CA',
-        ]);
+        return response()->json(Products::get());
     }
 
     /**
@@ -31,7 +29,7 @@ class ProductsApiController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return response()->json(Products::find($id));
     }
 
     /**

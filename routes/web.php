@@ -43,7 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::post('/api/products', [ProductsApiController::class, 'store'])->name('api.products.store');
-    Route::post('/api/products/{id}', [ProductsApiController::class, 'show'])->name('api.products.show');
+    Route::get('/api/products/{id}', [ProductsApiController::class, 'show'])->name('api.products.show');
     Route::put('/api/products/{id}', [ProductsApiController::class, 'update'])->name('api.products.update');
     Route::delete('/api/products/{id}', [ProductsApiController::class, 'destroy'])->name('api.products.destroy');
 

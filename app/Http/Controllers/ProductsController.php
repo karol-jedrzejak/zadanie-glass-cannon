@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Inertia\Inertia;
+
 class ProductsController extends Controller
 {
     /**
@@ -11,7 +13,7 @@ class ProductsController extends Controller
      */
     public function preview()
     {
-        //
+        return Inertia::render('Products/Preview');
     }
 
     /**
@@ -19,7 +21,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Products/Index');
     }
 
     /**
@@ -27,7 +29,7 @@ class ProductsController extends Controller
      */
     public function show()
     {
-        //
+        return Inertia::render('Products/Show');
     }
 
     /**
@@ -35,7 +37,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Products/Create');
     }
 
     /**
@@ -43,6 +45,6 @@ class ProductsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return Inertia::render('Products/Edit');
     }
 }

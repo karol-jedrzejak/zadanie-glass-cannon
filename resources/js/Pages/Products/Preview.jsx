@@ -1,6 +1,6 @@
 import { Link, Head } from "@inertiajs/react";
 
-export default function Welcome({ auth }) {
+export default function Preview({ auth }) {
     return (
         <>
             <Head title="Welcome" />
@@ -47,26 +47,7 @@ export default function Welcome({ auth }) {
                     )}
                 </div>
 
-                <div className="flex flex-col items-center">
-                    <div className="bg-slate-900 my-2 p-6 rounded-lg">
-                        <img
-                            className="w-[200px]"
-                            src="https://glasscannonunplugged.com/wp-content/uploads/2022/04/GCU-logo-light-2.svg"
-                            alt=""
-                        />
-                    </div>
-                    <div className="bg-slate-900 my-2 p-6 rounded-lg max-w-[200px]">
-                        <img
-                            className=""
-                            src="https://karol-jedrzejak.github.io/static/media/portret_mobile_1.ff3e0a9ef1bd363dc688.jpg"
-                            alt=""
-                        />
-                    </div>
-                    <div className="bg-slate-200 my-2 p-6 rounded-lg">
-                        Welcome to GlassCannon products example app created for
-                        recruitment process app by Karol Jędrzejak.
-                    </div>
-                </div>
+                <div className="flex flex-col items-center">tu treść</div>
             </div>
         </>
     );

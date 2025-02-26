@@ -28,6 +28,10 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/api/products', [ProductsApiController::class, 'index'])->name('api.products.index');
+Route::get('/products/preview', [ProductsController::class, 'preview'])->name('products.preview');
+
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -50,8 +54,5 @@ Route::middleware('auth')->group(function () {
         'edit'
     ]);
 });
-
-Route::get('/api/products', [ProductsApiController::class, 'index'])->name('api.products.index');
-Route::get('/products/preview', [ProductsController::class, 'preview'])->name('products.preview');
 
 require __DIR__ . '/auth.php';

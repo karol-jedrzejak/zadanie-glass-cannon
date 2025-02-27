@@ -19,7 +19,7 @@ export default function Show({ auth, id }) {
                 user={auth.user}
                 header={
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                        Product Information
+                        Product Information Page
                     </h2>
                 }
             >

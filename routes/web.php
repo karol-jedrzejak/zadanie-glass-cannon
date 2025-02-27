@@ -29,8 +29,8 @@ Route::get('/', function () {
 });
 
 Route::get('/api/products', [ProductsApiController::class, 'index'])->name('api.products.index');
-Route::get('/products/preview', [ProductsController::class, 'preview'])->name('products.preview');
-
+//Route::get('/products/preview', [ProductsController::class, 'preview'])->name('products.preview');
+Route::resource('products', ProductsController::class)->only(['index']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -48,7 +48,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/api/products/{id}', [ProductsApiController::class, 'destroy'])->name('api.products.destroy');
 
     Route::resource('products', ProductsController::class)->only([
-        'index',
         'show',
         'create',
         'edit'

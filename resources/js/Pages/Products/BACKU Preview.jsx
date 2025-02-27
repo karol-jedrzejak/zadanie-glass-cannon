@@ -1,6 +1,11 @@
 import { Link, Head } from "@inertiajs/react";
+import { useState, useEffect } from "react";
 
 export default function Preview({ auth }) {
+    useEffect(() => {
+        console.log(auth);
+    }, []);
+
     return (
         <>
             <Head title="Welcome" />

@@ -11,10 +11,10 @@ class ProductsController extends Controller
     /**
      * Display a listing of the resource for not logged in person.
      */
-    public function preview()
+/*     public function preview()
     {
         return Inertia::render('Products/Preview');
-    }
+    } */
 
     /**
      * Display a listing of the resource for logged in person.
@@ -27,9 +27,9 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(string $id)
     {
-        return Inertia::render('Products/Show');
+        return Inertia::render('Products/Show',['id' => $id]);
     }
 
     /**

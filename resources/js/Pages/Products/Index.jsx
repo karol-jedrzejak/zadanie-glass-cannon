@@ -1,9 +1,15 @@
-import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Link, Head } from "@inertiajs/react";
 import axios from "axios";
 import { useState, useEffect } from "react";
+
+import { Link, Head } from "@inertiajs/react";
+
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+
+//Components
 import Table from "@/Components/Table";
 import ButtonStandard from "@/Components/ButtonStandard";
+
+// Icons
 import IconShow from "@/Icons/IconShow";
 import IconEdit from "@/Icons/IconEdit";
 import IconDelete from "@/Icons/IconDelete";
@@ -17,9 +23,6 @@ export default function Index({ auth }) {
             .get("http://127.0.0.1:8000/api/products")
             .then((data) => setProducts(data.data))
             .catch((error) => console.log(error));
-        console.log(products);
-        console.log(auth);
-
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
         };
@@ -33,6 +36,7 @@ export default function Index({ auth }) {
     // Tables
     const searchitemsPc = ["name", "description"];
     const searchitemsMobile = ["name"];
+
     const columnsPc = [
         {
             id: 1,
@@ -214,7 +218,7 @@ export default function Index({ auth }) {
         );
     }
 
-    // CRUD
+    // CRUD links
     function resolveCreate() {
         window.open(route("products.create"), "_self");
     }
@@ -245,7 +249,7 @@ export default function Index({ auth }) {
                         user={auth.user}
                         header={
                             <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                                Index
+                                Products List
                             </h2>
                         }
                     >

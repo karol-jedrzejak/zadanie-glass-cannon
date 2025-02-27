@@ -20,3 +20,17 @@ Strona będzie dostępna pod adresem
 ```
 http://127.0.0.1:8000/
 ```
+
+Przykładowy użytkownik
+
+Login
+
+```
+test@test.com
+```
+
+Hasło
+
+```
+test
+```

@@ -12,7 +12,7 @@ npm run dev
 php artisan serve
 ```
 
-W przypadku gdy mamy lokalną bazę danych (Xampp, docker itp) możemy usnąć plik ".env" i użyć pliku ".env.mysql" zmieniąjąc jego nazwę na ".env". W tym przypadku po uruchomieniu komendy "composer install" uruchamiamy 2 komendy poniżej które utworzą bazę tabele i dane (pry komendzie php artisan migrate zatwierdzamy utworzenie nowej bazy danych).
+W przypadku gdy mamy lokalną bazę danych (Xampp, docker itp) możemy usnąć plik ".env" i użyć pliku ".env.mysql" zmieniąjąc jego nazwę na ".env". W tym przypadku po uruchomieniu komendy "composer install" uruchamiamy 2 komendy poniżej które utworzą bazę tabele i dane (przy komendzie php artisan migrate zatwierdzamy utworzenie nowej bazy danych).
 
 ```
 php artisan migrate

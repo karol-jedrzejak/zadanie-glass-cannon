@@ -2,7 +2,7 @@
 
 ## Uruchomienie
 
-Do uruchomienia projektu niezbędna jest lokalna baza danych (Docker, Xammpp itd. z domyślnymi ustawieniami użytkownika). Po pobraniu wchodzimy w folder z projektem i uruchamiamy kolejno komendy:
+Domyślnie w pliku ".env" wybrana jest baza danych sqlite (baza danych w pliku). W przypadku gdy mamy lokalną bazę danych (Xampp, docker itp) możemy usnąć plik ".env" i użyć pliku ".env.mysql" zmieniąjąc jego nazwę na ".env". Po pobraniu wchodzimy w folder z projektem i uruchamiamy kolejno komendy (po uruchmonieniu komendy migrate zatwierdzamy utworzenie nowego pliky klikając yes i zatwierdzając enterem):
 
 ```
 npm instal

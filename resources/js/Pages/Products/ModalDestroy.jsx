@@ -1,9 +1,8 @@
-import ButtonStandard from "@/Components/ButtonStandard";
-import Modal from "@/Components/Modal";
 import React from "react";
 import { router } from "@inertiajs/react";
 
-import axios from "axios";
+import ButtonStandard from "@/Components/ButtonStandard";
+import Modal from "@/Components/Modal";
 
 export default function ModalDestroy({
     deletionTarget,
@@ -20,10 +19,6 @@ export default function ModalDestroy({
         e.preventDefault();
         router.delete(route("api.products.destroy", deletionTarget));
         getProducts();
-        /*         axios
-            .get("http://127.0.0.1:8000/api/products")
-            .then((data) => setProducts(data.data))
-            .catch((error) => console.log(error)); */
         closeModal();
     };
 

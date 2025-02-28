@@ -3,6 +3,7 @@ import ReactPaginate from "react-paginate";
 import ButtonStandard from "@/Components/ButtonStandard";
 
 export default function Table({
+    buttons,
     addButton = false,
     items,
     searchitems,
@@ -225,7 +226,11 @@ export default function Table({
                                 </th>
                             );
                         })}
-                        <th className="text-center px-4 py-2"></th>
+                        {buttons ? (
+                            <th className="text-center px-4 py-2"></th>
+                        ) : (
+                            <></>
+                        )}
                     </tr>
                 </thead>
                 <tbody>{displayItems}</tbody>

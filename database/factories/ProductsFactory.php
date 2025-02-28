@@ -20,10 +20,10 @@ class ProductsFactory extends Factory
         return [
             'name' => fake()->unique()->word(),
             'description' => fake()->paragraph(3, false),
-            'price' => fake()->randomFloat(2, 1, 10000),
+            'price' => fake()->randomFloat(2, 0.01, 10000),
             'stock' => fake()->numberBetween(0, 1000),
             'rank' => fake()->numberBetween(1, 100),
-            'image' => "https://picsum.photos/id/".fake()->unique()->numberBetween(1, 100)."/640/480",
+            'image' => "https://picsum.photos/id/" . fake()->unique()->numberBetween(1, 100) . "/640/480",
             'created_at' => fake()->dateTimeBetween('-5 years', '-1 day'),
             'updated_at' => fake()->dateTimeBetween('-5 years', '-1 day'),
         ];

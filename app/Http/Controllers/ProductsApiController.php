@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Models\Products;
 
+use App\Http\Requests\ProductsStoreRequest;
+use App\Http\Requests\ProductsUpdateRequest;
+
 class ProductsApiController extends Controller
 {
     /**
@@ -19,9 +22,12 @@ class ProductsApiController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductsStoreRequest $request)
     {
-        //
+        $request->validated();
+        $data = $request->post();
+        $data['id'] = null;
+        Products::create($data);
     }
 
     /**
@@ -35,9 +41,12 @@ class ProductsApiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProductsUpdateRequest $request, string $id)
     {
-        //
+        $request->validated();
+        $data = $request->post();
+        $product = Products::find($id);
+        $product->update($data);
     }
 
     /**
@@ -45,6 +54,6 @@ class ProductsApiController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Products::find($id)->delete();
     }
 }

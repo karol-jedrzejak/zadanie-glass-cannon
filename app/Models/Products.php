@@ -21,6 +21,8 @@ class Products extends Model
         'stock',
         'rank',
         'image',
+        'updated_at',
+        'created_at',
     ];
 
     protected $attributes = [

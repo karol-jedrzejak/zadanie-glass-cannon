@@ -29,7 +29,7 @@ Route::get('/', function () {
 });
 
 Route::get('/api/products', [ProductsApiController::class, 'index'])->name('api.products.index');
-//Route::get('/products/preview', [ProductsController::class, 'preview'])->name('products.preview');
+Route::get('/api/products/{id}', [ProductsApiController::class, 'show'])->name('api.products.show');
 Route::resource('products', ProductsController::class)->only(['index']);
 
 Route::get('/dashboard', function () {
@@ -43,7 +43,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::post('/api/products', [ProductsApiController::class, 'store'])->name('api.products.store');
-    Route::get('/api/products/{id}', [ProductsApiController::class, 'show'])->name('api.products.show');
     Route::put('/api/products/{id}', [ProductsApiController::class, 'update'])->name('api.products.update');
     Route::delete('/api/products/{id}', [ProductsApiController::class, 'destroy'])->name('api.products.destroy');
 

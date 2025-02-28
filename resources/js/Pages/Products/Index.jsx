@@ -14,15 +14,25 @@ import IconShow from "@/Icons/IconShow";
 import IconEdit from "@/Icons/IconEdit";
 import IconDelete from "@/Icons/IconDelete";
 
+// Modal Destroy
+import ModalDestroy from "@/Pages/Products/ModalDestroy";
+
 export default function Index({ auth }) {
     const [products, setProducts] = useState(null);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-    useEffect(() => {
+    const [currentTarget, setCurrentTarget] = useState(null);
+    const [deletionModal, setDeletionModal] = useState(false);
+
+    function getProducts() {
         axios
             .get("http://127.0.0.1:8000/api/products")
             .then((data) => setProducts(data.data))
             .catch((error) => console.log(error));
+    }
+
+    useEffect(() => {
+        getProducts();
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
         };
@@ -129,18 +139,19 @@ export default function Index({ auth }) {
                 <td className="px-4 py-2">
                     <img src={item.image} alt="" />
                 </td>
-                <td className="px-4 py-2 md:whitespace-nowrap w-px">
-                    <ButtonStandard
-                        className="m-1"
-                        btn_style="green"
-                        target_id={item.id}
-                        tabIndex="-1"
-                        onClick={resolveShow}
-                    >
-                        <IconShow></IconShow>
-                    </ButtonStandard>
-                    {auth.user ? (
-                        <>
+
+                {auth.user ? (
+                    <>
+                        <td className="px-4 py-2 md:whitespace-nowrap w-px">
+                            <ButtonStandard
+                                className="m-1"
+                                btn_style="green"
+                                target_id={item.id}
+                                tabIndex="-1"
+                                onClick={resolveShow}
+                            >
+                                <IconShow></IconShow>
+                            </ButtonStandard>
                             <ButtonStandard
                                 className="m-1"
                                 target_id={item.id}
@@ -157,12 +168,12 @@ export default function Index({ auth }) {
                                 onClick={resolveDelete}
                             >
                                 <IconDelete></IconDelete>
-                            </ButtonStandard>
-                        </>
-                    ) : (
-                        <></>
-                    )}
-                </td>
+                            </ButtonStandard>{" "}
+                        </td>
+                    </>
+                ) : (
+                    <></>
+                )}
             </tr>
         );
     }
@@ -180,18 +191,19 @@ export default function Index({ auth }) {
                 <td className="px-1 py-2">
                     <img src={item.image} alt="" />
                 </td>
-                <td className="px-1 py-2 md:whitespace-nowrap w-px">
-                    <ButtonStandard
-                        className="m-1"
-                        btn_style="green"
-                        target_id={item.id}
-                        tabIndex="-1"
-                        onClick={resolveShow}
-                    >
-                        <IconShow></IconShow>
-                    </ButtonStandard>
-                    {auth.user ? (
-                        <>
+
+                {auth.user ? (
+                    <>
+                        <td className="px-1 py-2 md:whitespace-nowrap w-px">
+                            <ButtonStandard
+                                className="m-1"
+                                btn_style="green"
+                                target_id={item.id}
+                                tabIndex="-1"
+                                onClick={resolveShow}
+                            >
+                                <IconShow></IconShow>
+                            </ButtonStandard>
                             <ButtonStandard
                                 className="m-1"
                                 target_id={item.id}
@@ -209,13 +221,19 @@ export default function Index({ auth }) {
                             >
                                 <IconDelete></IconDelete>
                             </ButtonStandard>
-                        </>
-                    ) : (
-                        <></>
-                    )}
-                </td>
+                        </td>
+                    </>
+                ) : (
+                    <></>
+                )}
             </tr>
         );
+    }
+
+    // Deletion Modal
+    function resolveDelete(e) {
+        setCurrentTarget(e.currentTarget.getAttribute("target_id"));
+        setDeletionModal(true);
     }
 
     // CRUD links
@@ -234,17 +252,11 @@ export default function Index({ auth }) {
             "_self"
         );
     }
-    function resolveDelete(e) {
-        console.log("delete");
-        console.log(e.currentTarget.getAttribute("target_id"));
-        console.log(window.innerWidth);
-    }
 
     return (
         <>
             {auth.user ? (
                 <>
-                    {" "}
                     <AuthenticatedLayout
                         user={auth.user}
                         header={
@@ -253,14 +265,31 @@ export default function Index({ auth }) {
                             </h2>
                         }
                     >
-                        <Head title="Dashboard" />
+                        <Head title="Products" />
+
+                        {/* ---------------- Delete Modal ---------------- */}
+                        <>
+                            {deletionModal ? (
+                                <ModalDestroy
+                                    getProducts={getProducts}
+                                    showModal={deletionModal}
+                                    setShowModal={setDeletionModal}
+                                    deletionTarget={currentTarget}
+                                ></ModalDestroy>
+                            ) : (
+                                <></>
+                            )}
+                        </>
+
+                        {/* ---------------- Tables ----------------  */}
                         {products ? (
                             <>
                                 {windowWidth > 768 ? (
                                     <Table
+                                        buttons={true}
                                         addButton={resolveCreate}
-                                        defaultSort="description"
-                                        defaultSortDirection="asc"
+                                        defaultSort="id"
+                                        defaultSortDirection="desc"
                                         items={products}
                                         searchitems={searchitemsPc}
                                         columns={columnsPc}
@@ -268,9 +297,10 @@ export default function Index({ auth }) {
                                     />
                                 ) : (
                                     <Table
+                                        buttons={true}
                                         addButton={resolveCreate}
-                                        defaultSort="description"
-                                        defaultSortDirection="asc"
+                                        defaultSort="id"
+                                        defaultSortDirection="desc"
                                         items={products}
                                         searchitems={searchitemsMobile}
                                         columns={columnsMobile}
@@ -279,54 +309,35 @@ export default function Index({ auth }) {
                                 )}
                             </>
                         ) : (
-                            <div className="py-12">LOADING</div>
+                            <div>LOADING</div>
                         )}
                     </AuthenticatedLayout>
                 </>
             ) : (
                 <>
-                    <Head title="Welcome" />
+                    <Head title="Products" />
                     <div className="relative min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
                         <div className="p-6 text-end">
-                            {auth.user ? (
-                                <>
-                                    <Link
-                                        href={route("products.index")}
-                                        className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                                    >
-                                        Products
-                                    </Link>
-                                    <Link
-                                        href={route("dashboard")}
-                                        className="ms-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                                    >
-                                        Dashboard
-                                    </Link>
-                                </>
-                            ) : (
-                                <>
-                                    <Link
-                                        href={route("products.index")}
-                                        className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                                    >
-                                        Products
-                                    </Link>
+                            <Link
+                                href={route("products.index")}
+                                className="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                            >
+                                Products
+                            </Link>
 
-                                    <Link
-                                        href={route("login")}
-                                        className="ms-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                                    >
-                                        Log in
-                                    </Link>
+                            <Link
+                                href={route("login")}
+                                className="ms-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                            >
+                                Log in
+                            </Link>
 
-                                    <Link
-                                        href={route("register")}
-                                        className="ms-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                                    >
-                                        Register
-                                    </Link>
-                                </>
-                            )}
+                            <Link
+                                href={route("register")}
+                                className="ms-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
+                            >
+                                Register
+                            </Link>
                         </div>
 
                         <div className="flex flex-col items-center">
@@ -334,8 +345,9 @@ export default function Index({ auth }) {
                                 <>
                                     {windowWidth > 768 ? (
                                         <Table
-                                            defaultSort="description"
-                                            defaultSortDirection="asc"
+                                            buttons={false}
+                                            defaultSort="id"
+                                            defaultSortDirection="desc"
                                             items={products}
                                             searchitems={searchitemsPc}
                                             columns={columnsPc}
@@ -343,8 +355,9 @@ export default function Index({ auth }) {
                                         />
                                     ) : (
                                         <Table
-                                            defaultSort="description"
-                                            defaultSortDirection="asc"
+                                            buttons={false}
+                                            defaultSort="id"
+                                            defaultSortDirection="desc"
                                             items={products}
                                             searchitems={searchitemsMobile}
                                             columns={columnsMobile}
@@ -353,7 +366,7 @@ export default function Index({ auth }) {
                                     )}
                                 </>
                             ) : (
-                                <div className="py-12">LOADING</div>
+                                <div>LOADING</div>
                             )}
                         </div>
                     </div>

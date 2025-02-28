@@ -2,20 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Http\Request;
 
 use Inertia\Inertia;
 
 class ProductsController extends Controller
 {
-    /**
-     * Display a listing of the resource for not logged in person.
-     */
-/*     public function preview()
-    {
-        return Inertia::render('Products/Preview');
-    } */
-
     /**
      * Display a listing of the resource for logged in person.
      */
@@ -29,7 +24,7 @@ class ProductsController extends Controller
      */
     public function show(string $id)
     {
-        return Inertia::render('Products/Show',['id' => $id]);
+        return Inertia::render('Products/Show', ['id' => $id]);
     }
 
     /**
@@ -45,6 +40,6 @@ class ProductsController extends Controller
      */
     public function edit(string $id)
     {
-        return Inertia::render('Products/Edit');
+        return Inertia::render('Products/Edit', ['id' => $id]);
     }
 }

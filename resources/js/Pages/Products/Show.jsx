@@ -23,7 +23,7 @@ export default function Show({ auth, id }) {
                     </h2>
                 }
             >
-                <Head title="Dashboard" />
+                <Head title="Product Info" />
                 <div>
                     {product ? (
                         <>
@@ -128,7 +128,7 @@ export default function Show({ auth, id }) {
                             </div>
                         </>
                     ) : (
-                        <>tak</>
+                        <div>LOADING</div>
                     )}
                 </div>
             </AuthenticatedLayout>
